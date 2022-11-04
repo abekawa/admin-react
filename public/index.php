@@ -1,13 +1,27 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 use App\Kernel;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
+// header('Access-Control-Allow-Headers:*');
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
+// if ($_SERVER['APP_DEBUG']) {
+//     header('Access-Control-Allow-Origin:'.rtrim($_SERVER['HTTP_REFERER'], '/'));
+// } else {
+//     header('Access-Control-Allow-Origin:*');
+// }
+// header('Access-Control-Allow-Headers:*');
+// header('Access-Control-Allow-Credentials:true');
+// header('Access-Control-Allow-Headers:X-Requested-With, Content-Type, withCredentials');
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    die();
+}
 
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
